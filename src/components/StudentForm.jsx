@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import Swal from "sweetalert2";
 function StudentForm({ addStudent, updateStudent, editStudent }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,10 +21,16 @@ function StudentForm({ addStudent, updateStudent, editStudent }) {
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
     if (!emailRegex.test(email)) {
-      alert("Invalid email format");
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Email",
+        text: "Please enter a valid Gmail address (example@gmail.com)",
+        confirmButtonColor: "#4f46e5",
+      });
+
       return;
     }
 
